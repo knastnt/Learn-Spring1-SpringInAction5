@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.knasys.springinactioon5.entities.Ingredient;
 import ru.knasys.springinactioon5.entities.Ingredient.Type;
@@ -37,5 +38,11 @@ public class DesignTacoContriller {
         }
         model.addAttribute("design_tk", new Taco());
         return "design";
+    }
+
+    @PostMapping
+    public String processDesign(Taco taco){
+        log.info("Процессинг типа дизайн, но на самом деле тако " + taco.toString());
+        return "redirect:/orders/current";
     }
 }

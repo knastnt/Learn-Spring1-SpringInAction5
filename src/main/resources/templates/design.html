@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+    <h2 class="hdr">Дизайн</h2>
+    <img th:src="@{/images/TacoCloud.png}"/>
+    <div>
+        <h3>Выбери свой врап</h3>
+        <div th:each="ingred : ${wrap}">
+            <label>
+                <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+            </label>
+            <br/>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package ru.knasys.springinactioon5.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import ru.knasys.springinactioon5.entities.Ingredient;
 import ru.knasys.springinactioon5.entities.Ingredient.Type;
 import ru.knasys.springinactioon5.entities.Taco;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,8 +43,12 @@ public class DesignTacoContriller {
     }
 
     @PostMapping
-    public String processDesign(Taco taco){
-        log.info("Процессинг типа дизайн, но на самом деле тако " + taco.toString());
+    public String processDesign(@Valid Taco taco, Errors errors) {  /* выполнить проверку на предоставленном объекте тако */
+        if(errors.hasErrors()){
+            return "design";
+        }
+        log.info("Процессинг типа дизайн, но на самом деле тако " + taco);
         return "redirect:/orders/current";
+//        return "";
     }
 }

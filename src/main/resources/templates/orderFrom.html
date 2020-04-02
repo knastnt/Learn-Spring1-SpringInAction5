@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+    <h2 class="hdr">Ордер на ваше произведение искусства</h2>
+    <img th:src="@{/images/TacoCloud.png}"/>
+    <form method="post" th:action="@{/orders}" th:object="${order}">
+        <a th:href="@{/design}" class="another">сдерать другой тако</a>
+        <div th:if="${#fields.hasErrors()}">
+            <span class="validationError">
+                Исправьте ошибки и подтвердите снова
+            </span>
+        </div>
+        <h3>доставить мой тако сюда...</h3>
+        <label>
+            Имя:
+            <input type="text" th:field="*{name}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Message</span>
+        <br/>
+        <label>
+            Улица:
+            <input type="text" th:field="*{street}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Error Message</span>
+        <br/>
+        <label>
+            Город:
+            <input type="text" th:field="*{city}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">Error Message</span>
+        <br/>
+        <label>
+            Область/Край:
+            <input type="text" th:field="*{state}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">Error Message</span>
+        <br/>
+        <label>
+            Почтовый индекс:
+            <input type="text" th:field="*{zip}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Error Message</span>
+        <br/>
+        <h3>Данные банковской карты</h3>
+        <label>
+            Номер карты:
+            <input type="text" th:field="*{ccNumber}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">Error Message</span>
+        <br/>
+        <label>
+            Действует до:
+            <input type="text" th:field="*{ccExpiration}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">Error Message</span>
+        <br/>
+        <label>
+            CVV:
+            <input type="text" th:field="*{ccCVV}"/>
+        </label>
+        <span class="validationError" th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">Error Message</span>
+        <br/>
+        <input type="submit" value="Подтвердить">
+    </form>
+</body>
+</html>

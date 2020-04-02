@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
 </head>
 <body>
-    Хэлло, эт домашняя страница
+    <h2 class="hdr">Хэлло, эт домашняя страница</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
+    <a th:href="@{/design}">Сделать свой тако</a>
 </body>
 </html>

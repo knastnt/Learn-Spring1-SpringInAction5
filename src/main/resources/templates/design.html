@@ -10,14 +10,66 @@
     <h2 class="hdr">Дизайн</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
     <div>
-        <h3>Выбери свой врап</h3>
-        <div th:each="ingred : ${wrap}">
-            <label>
-                <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
-                <span th:text="${ingred.name}">INGREDIENT_NAME</span>
-            </label>
-            <br/>
-        </div>
+        <form method="post" th:object="${design_tk}">
+            <div class="grid">
+                <div class="ingredient-group">
+                    <h4>Выбери свой врап</h4>
+                    <div th:each="ingred : ${wrap}">
+                        <label>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+                        </label>
+                        <br/>
+                    </div>
+                </div>
+                <div class="ingredient-group">
+                    <h4>Выбери свой протеин</h4>
+                    <div th:each="ingred : ${protein}">
+                        <label>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+                        </label>
+                        <br/>
+                    </div>
+                </div>
+                <div class="ingredient-group">
+                    <h4>Выбери свой сыр</h4>
+                    <div th:each="ingred : ${cheese}">
+                        <label>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+                        </label>
+                        <br/>
+                    </div>
+                </div>
+                <div class="ingredient-group">
+                    <h4>Выбери свой соус</h4>
+                    <div th:each="ingred : ${sauce}">
+                        <label>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+                        </label>
+                        <br/>
+                    </div>
+                </div>
+                <div class="ingredient-group">
+                    <h4>Выбери свой вегги</h4>
+                    <div th:each="ingred : ${veggies}">
+                        <label>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <span th:text="${ingred.name}">INGREDIENT_NAME</span>
+                        </label>
+                        <br/>
+                    </div>
+                </div>
+                <div>
+                    <h4>Дайте имя своему творению</h4>
+                    <input type="text" th:field="*{name}">
+                    <br>
+                    <button>Подтвердить</button>
+                </div>
+            </div>
+        </form>
     </div>
 </body>
 </html>

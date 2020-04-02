@@ -35,7 +35,7 @@ public class DesignTacoContriller {
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), ingredients.stream().filter(ingredient -> ingredient.getType() == type).collect(Collectors.toList()));
         }
-        model.addAttribute("design", new Taco());
+        model.addAttribute("design_tk", new Taco());
         return "design";
     }
 }

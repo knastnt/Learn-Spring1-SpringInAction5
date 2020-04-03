@@ -21,7 +21,7 @@ public class OrdersController {
         return "orderFrom";
     }
 
-    @PostMapping
+    @PostMapping("/current")
     public String processOrder(@Valid Order order, Errors errors){
         if(errors.hasErrors()){
             return "orderFrom";

@@ -9,7 +9,7 @@
 <body>
     <h2 class="hdr">Ордер на ваше произведение искусства</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
-    <form method="post" th:action="@{/orders}" th:object="${order}">
+    <form method="post" th:object="${order}">
         <a th:href="@{/design}" class="another">сдерать другой тако</a>
         <div th:if="${#fields.hasErrors()}">
             <span class="validationError">

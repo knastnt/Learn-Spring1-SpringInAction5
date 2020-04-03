@@ -10,6 +10,7 @@ public class Taco {
     @NotNull
     @Size(min = 2, message = "Имя должно быть не менее 2 и не более 20 символов", max = 20)
     private String name;
+    @NotNull(message = "Выбирите хотябы один ингридиент")
     @Size(min = 1, message = "Выбирите хотябы один ингридиент")
     private List<String> ingredients;
 }

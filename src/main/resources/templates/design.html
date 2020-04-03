@@ -10,13 +10,14 @@
     <h2 class="hdr">Дизайн</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
     <div>
+        <span class="validationError" th:text="${test}"></span>
         <form method="post" th:object="${taco}">
             <div class="grid">
                 <div class="ingredient-group">
                     <h4>Выбери свой врап</h4>
                     <div th:each="ingred : ${wrap}">
                         <label>
-                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}" th:checked="${taco.ingredients != null} ? ${taco.ingredients.contains(ingred.id)}"/>
                             <span th:text="${ingred.name}">INGREDIENT_NAME</span>
                         </label>
                         <br/>
@@ -26,7 +27,7 @@
                     <h4>Выбери свой протеин</h4>
                     <div th:each="ingred : ${protein}">
                         <label>
-                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}" th:checked="${taco.ingredients != null} ? ${taco.ingredients.contains(ingred.id)}"/>
                             <span th:text="${ingred.name}">INGREDIENT_NAME</span>
                         </label>
                         <br/>
@@ -36,7 +37,7 @@
                     <h4>Выбери свой сыр</h4>
                     <div th:each="ingred : ${cheese}">
                         <label>
-                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}" th:checked="${taco.ingredients != null} ? ${taco.ingredients.contains(ingred.id)}"/>
                             <span th:text="${ingred.name}">INGREDIENT_NAME</span>
                         </label>
                         <br/>
@@ -46,7 +47,7 @@
                     <h4>Выбери свой соус</h4>
                     <div th:each="ingred : ${sauce}">
                         <label>
-                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}" th:checked="${taco.ingredients != null} ? ${taco.ingredients.contains(ingred.id)}"/>
                             <span th:text="${ingred.name}">INGREDIENT_NAME</span>
                         </label>
                         <br/>
@@ -56,15 +57,17 @@
                     <h4>Выбери свой вегги</h4>
                     <div th:each="ingred : ${veggies}">
                         <label>
-                            <input name="ingredients" type="checkbox" th:value="${ingred.id}"/>
+                            <input name="ingredients" type="checkbox" th:value="${ingred.id}" th:checked="${taco.ingredients != null} ? ${taco.ingredients.contains(ingred.id)}"/>
                             <span th:text="${ingred.name}">INGREDIENT_NAME</span>
                         </label>
                         <br/>
                     </div>
                 </div>
+                <p class="validationError" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">Error Message</p>
                 <div>
                     <h4>Дайте имя своему творению</h4>
                     <input type="text" th:field="*{name}">
+                    <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error Message</span>
                     <br>
                     <button>Подтвердить</button>
                 </div>

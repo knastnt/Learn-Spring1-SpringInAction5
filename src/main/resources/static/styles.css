@@ -1,3 +1,7 @@
 .hdr{
     color: #3a70ff;
 }
+
+.validationError{
+    color: #e00000;
+}

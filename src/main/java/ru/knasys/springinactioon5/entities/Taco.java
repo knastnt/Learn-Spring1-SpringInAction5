@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class Taco {
+    private Long id;
     @NotNull
     @Size(min = 2, message = "Имя должно быть не менее 2 и не более 20 символов", max = 20)
     private String name;

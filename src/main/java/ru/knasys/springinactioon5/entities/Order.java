@@ -7,6 +7,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 public class Order {
+    private Long id;
     @NotBlank(message = "Заполните поле Имя")
     private String name;
     @NotBlank(message = "Заполните поле Улица")

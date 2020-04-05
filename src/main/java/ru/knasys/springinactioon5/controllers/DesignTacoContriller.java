@@ -5,30 +5,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.knasys.springinactioon5.db.IngredientRepository;
+import ru.knasys.springinactioon5.db.TacoRepository;
 import ru.knasys.springinactioon5.entities.Ingredient;
 import ru.knasys.springinactioon5.entities.Ingredient.Type;
+import ru.knasys.springinactioon5.entities.Order;
 import ru.knasys.springinactioon5.entities.Taco;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j /* генерирует объект logger для класса */
 @Controller
 @RequestMapping("/design")
+@SessionAttributes("order")
 public class DesignTacoContriller {
     private IngredientRepository ingredientRepository;
+    private TacoRepository tacoRepository;
 
     @Autowired
-    public DesignTacoContriller(IngredientRepository ingredientRepository) {
+    public DesignTacoContriller(IngredientRepository ingredientRepository, TacoRepository tacoRepository) {
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
 
     @GetMapping
@@ -49,6 +50,11 @@ public class DesignTacoContriller {
             return "design";
         }
         log.info("Процессинг типа дизайн, но на самом деле тако " + taco);
+
+        Taco saved = tacoRepository.save(taco);
+        Order order = (Order) model.getAttribute("order");
+        order.getTacos().add(saved);
+
         return "redirect:/orders/current";
 //        return "";
     }
@@ -73,5 +79,15 @@ public class DesignTacoContriller {
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), ingredients.stream().filter(ingredient -> ingredient.getType() == type).collect(Collectors.toList()));
         }
+    }
+
+    @ModelAttribute("order")
+    private Order order() {
+        return new Order();
+    }
+
+    @ModelAttribute("taco")
+    private Taco taco() {
+        return new Taco();
     }
 }

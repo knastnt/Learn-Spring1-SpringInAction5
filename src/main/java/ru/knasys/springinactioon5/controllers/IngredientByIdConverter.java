@@ -7,7 +7,12 @@ package ru.knasys.springinactioon5.controllers;
         import ru.knasys.springinactioon5.db.IngredientRepository;
         import ru.knasys.springinactioon5.entities.Ingredient;
 
-
+/*
+позволяет решить исключение
+Failed to convert property value of type java.lang.String to required type java.util.List for property ingredients;
+nested exception is java.lang.IllegalStateException: Cannot convert value of type java.lang.String to required type
+ru.knasys.springinactioon5.entities.Ingredient for property ingredients[0]: no matching editors or conversion strategy found
+ */
 @Component
 public class IngredientByIdConverter implements Converter<String, Ingredient> {
 

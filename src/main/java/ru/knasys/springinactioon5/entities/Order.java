@@ -2,6 +2,8 @@ package ru.knasys.springinactioon5.entities;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
@@ -10,8 +12,12 @@ import java.util.List;
 import java.util.Set;
 
 @Data
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotBlank(message = "Заполните поле Имя")
     private String name;
     @NotBlank(message = "Заполните поле Улица")
@@ -32,5 +38,11 @@ public class Order {
 
     private Date placedAt;
 
+    @ManyToMany
     private final List<Taco> tacos = new ArrayList<>();
+
+    @PrePersist
+    private void placeAt(){
+        placedAt = new Date();
+    }
 }

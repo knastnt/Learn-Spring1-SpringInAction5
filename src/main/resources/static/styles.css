@@ -5,3 +5,19 @@
 .validationError{
     color: #e00000;
 }
+
+
+.order {
+    background-color: #d6e8f7;
+    margin: 1em;
+    padding: .5em;
+}
+
+.tacos {
+    margin-left: 1em;
+}
+.taco {
+    background-color: #f2b2b2;
+    padding: 0.3em;
+    margin-top: .5em;
+}

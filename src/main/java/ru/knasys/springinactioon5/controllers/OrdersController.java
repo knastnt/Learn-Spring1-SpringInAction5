@@ -13,6 +13,8 @@ import ru.knasys.springinactioon5.db.OrderRepository;
 import ru.knasys.springinactioon5.entities.Order;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -40,5 +42,16 @@ public class OrdersController {
         orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/";
+    }
+
+    @GetMapping // обрабатываем просто /orders
+    public String showOrders(Model model){
+
+        List<Order> orders = new ArrayList<>();
+        orderRepository.findAll().forEach(orders::add);
+
+        model.addAttribute(orders);
+
+        return "showOrders";
     }
 }

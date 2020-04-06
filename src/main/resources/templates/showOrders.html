@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
+</head>
+<body>
+    <h2 class="hdr">Заказы</h2>
+    <img th:src="@{/images/TacoCloud.png}"/>
+    <br>
+    <a th:href="@{/}">назад</a>
+    <div>
+        <div class="order" th:each="order : ${orderList}">
+            <div th:text="${order.name}"></div>
+            <div th:text="${order.street}"></div>
+            <div th:text="${order.city}"></div>
+            <div th:text="${order.state}"></div>
+            <div th:text="${order.zip}"></div>
+            <div th:text="${order.ccNumber}"></div>
+            <div th:text="${order.ccExpiration}"></div>
+            <div th:text="${order.placedAt}"></div>
+            <div class="tacos">
+                <div class="taco" th:each="taco : ${order.tacos}">
+                    <div th:text="${taco.name}"></div>
+                    <div>
+                        <div class="ingred" th:each="ingred : ${taco.getIngredients()}">
+                            <div th:text="${ingred.name}"></div>
+                            <div th:text="${ingred.type}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

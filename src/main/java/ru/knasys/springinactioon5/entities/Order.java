@@ -39,7 +39,7 @@ public class Order {
 
     private Date placedAt;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private final List<Taco> tacos = new ArrayList<>();
 
     @PrePersist

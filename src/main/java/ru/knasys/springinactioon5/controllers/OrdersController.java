@@ -4,10 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.knasys.springinactioon5.db.OrderRepository;
 import ru.knasys.springinactioon5.entities.Order;
@@ -45,10 +42,15 @@ public class OrdersController {
     }
 
     @GetMapping // обрабатываем просто /orders
-    public String showOrders(Model model){
+    public String showOrders(Model model, @RequestParam(name = "zip", required = false) String filterZip){
 
         List<Order> orders = new ArrayList<>();
-        orderRepository.findAll().forEach(orders::add);
+
+        if(filterZip == null) {
+            orderRepository.findAll().forEach(orders::add);
+        }else{
+            orderRepository.findOrdersByZipOrderByPlacedAt(filterZip).forEach(orders::add);
+        }
 
         model.addAttribute(orders);
 

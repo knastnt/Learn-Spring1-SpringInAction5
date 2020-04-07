@@ -44,7 +44,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder encoder(){
-        return new StandardPasswordEncoder("53cr3t");
+    public PasswordEncoder encoder(){ /* тупо открытый текст*/
+        return new PasswordEncoder() {
+            @Override
+            public String encode(CharSequence charSequence) {
+                return charSequence.toString();
+            }
+
+            @Override
+            public boolean matches(CharSequence charSequence, String s) {
+                return charSequence.toString().equals(s);
+            }
+        };
+//        return new StandardPasswordEncoder("53cr3t");
     }
 }

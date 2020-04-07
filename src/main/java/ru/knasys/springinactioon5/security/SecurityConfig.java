@@ -39,23 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .contextSource()
 //                .url("ldap://192.168.0.250:389/dc=pb");
 
-        auth.userDetailsService(userDetailsService)
-        .passwordEncoder(encoder());
-    }
-
-    @Bean
-    public PasswordEncoder encoder(){ /* тупо открытый текст*/
-        return new PasswordEncoder() {
-            @Override
-            public String encode(CharSequence charSequence) {
-                return charSequence.toString();
-            }
-
-            @Override
-            public boolean matches(CharSequence charSequence, String s) {
-                return charSequence.toString().equals(s);
-            }
-        };
-//        return new StandardPasswordEncoder("53cr3t");
+        auth.userDetailsService(userDetailsService);
     }
 }

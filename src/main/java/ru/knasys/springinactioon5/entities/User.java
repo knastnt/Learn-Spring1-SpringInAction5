@@ -1,9 +1,6 @@
 package ru.knasys.springinactioon5.entities;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +14,7 @@ import java.util.Collection;
 @Entity
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class User implements UserDetails {
 
     @Id

@@ -1,6 +1,7 @@
 package ru.knasys.springinactioon5.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import ru.knasys.springinactioon5.db.OrderRepository;
 import ru.knasys.springinactioon5.entities.Order;
+import ru.knasys.springinactioon5.entities.User;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -31,11 +33,12 @@ public class OrdersController {
     }
 
     @PostMapping("/current")
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus){
+    public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus, @AuthenticationPrincipal User user){
         if(errors.hasErrors()){
             return "orderFrom";
         }
         log.info("Подтверждён ордер: " + order);
+        order.setUser(user);
         orderRepository.save(order);
         sessionStatus.setComplete();
         return "redirect:/";

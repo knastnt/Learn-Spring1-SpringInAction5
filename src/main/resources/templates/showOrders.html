@@ -21,6 +21,7 @@
             <div th:text="${order.ccNumber}"></div>
             <div th:text="${order.ccExpiration}"></div>
             <div th:text="${order.placedAt}"></div>
+            <div th:text="${order.user != null} ? 'user: ' + ${order.user.username} : 'no user' "></div>
             <div class="tacos">
                 <div class="taco" th:each="taco : ${order.tacos}">
                     <div th:text="${taco.name}"></div>

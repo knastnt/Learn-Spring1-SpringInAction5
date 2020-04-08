@@ -39,8 +39,11 @@ public class Order {
 
     private Date placedAt;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY) //работает ли? х.з.
     private final List<Taco> tacos = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY) //Этот точно работает
+    private User user;
 
     @PrePersist
     private void placeAt(){

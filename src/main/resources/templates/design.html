@@ -9,6 +9,10 @@
 <body>
     <h2 class="hdr">Дизайн</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
+    <br>
+    <a th:href="@{/}">На главную</a>
+    <br>
+    <br>
     <div>
         <span class="validationError" th:text="${test}"></span>
         <form method="post" th:object="${taco}">

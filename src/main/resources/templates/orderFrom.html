@@ -9,7 +9,7 @@
 <body>
     <h2 class="hdr">Ордер на ваше произведение искусства</h2>
     <img th:src="@{/images/TacoCloud.png}"/>
-    <form method="post" th:object="${order}">
+    <form method="post" th:object="${order}" th:action="@{/orders/current}">
         <a th:href="@{/design}" class="another">сдерать другой тако</a>
         <div th:if="${#fields.hasErrors()}">
             <span class="validationError">
@@ -52,6 +52,7 @@
             Номер карты:
             <input type="text" th:field="*{ccNumber}"/>
         </label>
+        <a href="https://creditcardgenerator.in/" target="_blank">genetator</a>
         <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">Error Message</span>
         <br/>
         <label>

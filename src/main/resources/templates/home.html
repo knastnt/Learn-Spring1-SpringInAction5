@@ -14,6 +14,10 @@
     <br>
     <a th:href="@{/orders}">Показать заказы</a>
     <br>
-    <a th:href="@{/register}">Регистрация</a>
+    <a th:href="@{/login}">Вход</a>
+    <br>
+    <form method="post" th:action="@{/logout}">
+        <input type="submit" value="Выход">
+    </form>
 </body>
 </html>

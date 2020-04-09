@@ -1,6 +1,9 @@
 package ru.knasys.springinactioon5.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,14 +48,28 @@ public class OrdersController {
     }
 
     @GetMapping // обрабатываем просто /orders
-    public String showOrders(Model model, @RequestParam(name = "zip", required = false) String filterZip){
+    public String showMyOrders(
+            @AuthenticationPrincipal User user,
+            Model model,
+            @RequestParam(name = "zip", required = false) String filterZip,
+            @RequestParam(name = "page", required = false) String page
+    ){
 
         List<Order> orders = new ArrayList<>();
 
+        Pageable pageable = null;
+        try {
+            int pageNum = Integer.parseInt(page);
+            pageable = PageRequest.of(pageNum,2);
+        }catch (Exception e){}
+
         if(filterZip == null) {
-            orderRepository.findAll().forEach(orders::add);
+//            orderRepository.findAll().forEach(orders::add);
+            orderRepository.findOrdersByUserOrderByPlacedAtDesc(user, pageable).get().forEach(orders::add);
         }else{
-            orderRepository.findOrdersByZipOrderByPlacedAt(filterZip).forEach(orders::add);
+//            orderRepository.findOrdersByUserAndZipOrderByPlacedAtDesc(user, filterZip, pageable).forEach(orders::add);
+            orderRepository.findOrdersByUserAndZipOrderByPlacedAtDesc(user, filterZip, pageable).get().forEach(orders::add);
+
         }
 
         model.addAttribute(orders);

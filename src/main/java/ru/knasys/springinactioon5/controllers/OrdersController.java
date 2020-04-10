@@ -1,7 +1,6 @@
 package ru.knasys.springinactioon5.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import ru.knasys.springinactioon5.config.AppProperties;
 import ru.knasys.springinactioon5.db.OrderRepository;
 import ru.knasys.springinactioon5.entities.Order;
 import ru.knasys.springinactioon5.entities.User;
@@ -25,7 +25,10 @@ import java.util.List;
 public class OrdersController {
     private OrderRepository orderRepository;
 
-    public OrdersController(OrderRepository orderRepository) {
+    private int pageSize;
+
+    public OrdersController(OrderRepository orderRepository, AppProperties appProperties) {
+        this.pageSize = appProperties.getOrderPageSize();
         this.orderRepository = orderRepository;
     }
 
@@ -60,7 +63,7 @@ public class OrdersController {
         Pageable pageable = null;
         try {
             int pageNum = Integer.parseInt(page);
-            pageable = PageRequest.of(pageNum,2);
+            pageable = PageRequest.of(pageNum,pageSize);
         }catch (Exception e){}
 
         if(filterZip == null) {
